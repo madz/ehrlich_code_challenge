@@ -3,6 +3,7 @@
 ## Run project
 
 flutter pub get
+
 flutter run -d all
 
 ##Run Code Generator
