@@ -2,6 +2,7 @@ import 'package:ehrlich_code_challenge/core/cubits/weather/weather_cubit.dart';
 import 'package:ehrlich_code_challenge/core/models/weather_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_device_type/flutter_device_type.dart';
 
 class WeatherPage extends StatelessWidget {
   @override
@@ -15,18 +16,63 @@ class WeatherPage extends StatelessWidget {
         builder: (_, weatherState) {
           final WeatherModel weatherModel = weatherState.weatherModel;
           if (weatherState.isSuccess) {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Center(
-                  child: Column(
+            if (Device.get().isTablet) {
+              return GridView.count(
+                crossAxisCount: 3,
+                children: [
+                  Column(
                     children: [
-                      Text('City = ${weatherModel.name}'),
-                      Text('Country = ${weatherModel.sys.country}'),
-                      Text('Weather = ${weatherModel.weather[0].main}'),
+                      Text('City'),
+                      Text('${weatherModel.name}'),
                     ],
                   ),
+                  Column(
+                    children: [
+                      Text('Country'),
+                      Text('${weatherModel.sys.country}'),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Text('Weather'),
+                      Text('${weatherModel.weather[0].main}'),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Text('Temperature'),
+                      Text('${weatherModel.main.temp}'),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Text('Wind speed'),
+                      Text('${weatherModel.wind.speed}'),
+                    ],
+                  ),
+                ],
+              );
+            }
+            return GridView.count(
+              crossAxisCount: 3,
+              children: [
+                Column(
+                  children: [
+                    Text('City'),
+                    Text('${weatherModel.name}'),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Text('Country'),
+                    Text('${weatherModel.sys.country}'),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Text('Weather'),
+                    Text('${weatherModel.weather[0].main}'),
+                  ],
                 ),
               ],
             );
