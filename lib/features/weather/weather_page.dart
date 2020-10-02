@@ -18,7 +18,7 @@ class WeatherPage extends StatelessWidget {
           if (weatherState.isSuccess) {
             if (Device.get().isTablet) {
               return GridView.count(
-                crossAxisCount: 3,
+                crossAxisCount: 5,
                 children: [
                   Column(
                     children: [
@@ -41,6 +41,7 @@ class WeatherPage extends StatelessWidget {
                   Column(
                     children: [
                       Text('Temperature'),
+                      Text('(F)'),
                       Text('${weatherModel.main.temp}'),
                     ],
                   ),
